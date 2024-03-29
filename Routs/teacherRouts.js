@@ -19,3 +19,4 @@ router
   .delete(controller.deleteTeacher);
 
   module.exports = router;
+  

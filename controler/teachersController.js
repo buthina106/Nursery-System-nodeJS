@@ -22,25 +22,25 @@ exports.getAllTeacher = (req, res, next) => {
   
 
 exports.insertTeacher = (req, res, next) => {
-  res.status(200).json({ data: req.body, file: req.file });
-  // const { fullName, password, email, image } = req.body;
-  //Technique 1 (generate a salt and hash on separate function calls)
-//   bcrypt.hash(password, 10, (err, hashedPassword) => {
-//     if (err) {
-//       return next(err); 
-//     }
-//     const newTeacher = new teacherSchema({
-//       fullName,
-//       password:hashedPassword, 
-//       email,
-//       image
-//   });
-//   newTeacher.save()
-//   .then((data) => {
-//       res.status(200).json({ message: "added", data });
-//   })
-//   .catch((error) => next(error));
-// });
+  // res.json({ data: req.body, file: req.file });
+  const { fullName, password, email, image } = req.body;
+  // Technique 1 (generate a salt and hash on separate function calls)
+  bcrypt.hash(password, 10, (err, hashedPassword) => {
+    if (err) {
+      return next(err); 
+    }
+    const newTeacher = new teacherSchema({
+      fullName,
+      password:hashedPassword, 
+      email,
+      image
+  });
+  newTeacher.save()
+  .then((data) => {
+      res.status(200).json({ message: "added", data });
+  })
+  .catch((error) => next(error));
+});
 };
 
   exports.updateTeacher = (req, res, next) => {

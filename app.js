@@ -2,7 +2,8 @@ const express = require("express");
 const TeacherRoute = require("./Routs/teacherRouts");
 const studentRoute=require("./Routs/childRoute");
 const ClassRoute=require("./Routs/classRoute");
-const bodyParser = require('body-parser');
+const upload = require('./imageUpload');
+// const bodyParser = require('body-parser');
 
 // const loginRoute = require("./Routs/authenticationRoute");
 // const authenticationMW = require("./MadelWare/authenticationMW");
@@ -10,6 +11,9 @@ const mongoose=require("mongoose");
 
 const server = express();
 const port = process.env.PORT || 8080;
+server.use(express.json());
+server.use(express.urlencoded({ extended: false }));
+server.use(upload);
 
 mongoose
   .connect("mongodb://127.0.0.1:27017/itiSystem")
@@ -30,15 +34,14 @@ server.use((request, response, next) => {
   next();
 });
 
-server.use(express.json());
 // server.use(loginRoute);
 // server.use(authenticationMW);
 
 server.use(TeacherRoute);
 server.use(studentRoute);
 server.use(ClassRoute);
-server.use(bodyParser.urlencoded({ extended: false}));
-server.use(bodyParser.json());
+
+
 
 server.use((request, response) => {
   response.status(404).json({ data: "Not Found" });
