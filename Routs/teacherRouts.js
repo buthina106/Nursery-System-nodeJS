@@ -5,17 +5,17 @@ const {
   insertValidator,updateValidator
 } = require("./../MadelWare/Validations/teacherValidator");
 const validatonResult = require("./../MadelWare/Validations/validationResult");
-// const { isAuthorized } = require("./../MadelWare/authenticationMW");
+const { isAuthorized } = require("./../MadelWare/authenticationMW");
 
 router
   .route("/teachers")
   // .get(isAuthorized,controller.getAllTeacher)
-  .get(validatonResult,controller.getAllTeacher)
-  .post(insertValidator,validatonResult,controller.insertTeacher);
+  .get(isAuthorized,validatonResult,controller.getAllTeacher)
+  .post(isAuthorized,insertValidator,validatonResult,controller.insertTeacher);
   
   router.route("/teachers/:_id")
-  .get(controller.getTeachertById)
-  .patch(updateValidator,controller.updateTeacher)
+  .get(isAuthorized,controller.getTeachertById)
+  .patch(isAuthorized,updateValidator,controller.updateTeacher)
   .delete(controller.deleteTeacher);
 
   module.exports = router;

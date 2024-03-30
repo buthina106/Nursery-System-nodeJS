@@ -33,7 +33,7 @@ exports.insertTeacher = (req, res, next) => {
       fullName,
       password:hashedPassword, 
       email,
-      image
+      image:req.file.filename
   });
   newTeacher.save()
   .then((data) => {

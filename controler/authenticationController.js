@@ -14,7 +14,7 @@ exports.login = (req, res, next) => {
       const token = jwt.sign(
         {
           _id:teacher._id,
-          role: "teachers",
+          role: "admin",
         },
         "iti_System",
         { expiresIn: "1hr" }

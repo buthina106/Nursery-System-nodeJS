@@ -16,9 +16,15 @@ const admin = {
     }
   };
   module.exports.isAuthorized = (req, res, next) => {
-    if (req.token.role == admin.role || req.token.role == "teachers") {
+    if (req.token.role === "admin") {
       next();
+    } else if (req.token.role === "teachers") {
+      if (req.params._id === req.token._id) {
+        next();
+      } else {
+        next(new Error("not Authorized"));
+      }
     } else {
-      next(new Error("not Authorized"));
+      next(new Error("Invalid role"));
     }
   };

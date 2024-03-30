@@ -3,10 +3,9 @@ const TeacherRoute = require("./Routs/teacherRouts");
 const studentRoute=require("./Routs/childRoute");
 const ClassRoute=require("./Routs/classRoute");
 const upload = require('./imageUpload');
-// const bodyParser = require('body-parser');
 
-// const loginRoute = require("./Routs/authenticationRoute");
-// const authenticationMW = require("./MadelWare/authenticationMW");
+const loginRoute = require("./Routs/authenticationRoute");
+const authenticationMW = require("./MadelWare/authenticationMW");
 const mongoose=require("mongoose");
 
 const server = express();
@@ -34,8 +33,8 @@ server.use((request, response, next) => {
   next();
 });
 
-// server.use(loginRoute);
-// server.use(authenticationMW);
+server.use(loginRoute);
+server.use(authenticationMW);
 
 server.use(TeacherRoute);
 server.use(studentRoute);
