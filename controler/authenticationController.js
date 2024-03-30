@@ -10,13 +10,13 @@ exports.login = (req, res, next) => {
       if (!teacher) {
         throw new Error("Not Authenticated");
       }
-
+      const secretKey = process.env.SECRET_KEY;
       const token = jwt.sign(
         {
           _id:teacher._id,
           role: "admin",
         },
-        "iti_System",
+        secretKey,
         { expiresIn: "1hr" }
       );
       res.json({ teacher, token });

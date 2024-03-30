@@ -4,10 +4,11 @@ const admin = {
     name: "Admin name",
     role: "admin"
 };
+const secretKey = process.env.SECRET_KEY;
   module.exports = (req, res, next) => {
     try {
       let token = req.get("authorization").split(" ")[1];
-      let decoded_token = jwt.verify(token,"iti_System");
+      let decoded_token = jwt.verify(token,secretKey);
       req.token = decoded_token;
       next();
     } catch (error) {

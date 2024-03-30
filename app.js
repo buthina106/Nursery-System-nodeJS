@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const TeacherRoute = require("./Routs/teacherRouts");
 const studentRoute=require("./Routs/childRoute");
@@ -9,16 +10,17 @@ const authenticationMW = require("./MadelWare/authenticationMW");
 const mongoose=require("mongoose");
 
 const server = express();
-const port = process.env.PORT || 8080;
+const port = process.env.PORT;
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
 server.use(upload);
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/itiSystem")
+  .connect(process.env.MONGO_URI)
   .then(() => {
     console.log("Connected....");
     server.listen(port, () => {
+      console.log(process.env.NODE_MODE)
       console.log("I am listening.........", port);
     });
   })
