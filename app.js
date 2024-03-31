@@ -30,7 +30,7 @@ const options = {
       
     ],
   },
-  apis: ["./app.js"],
+  apis: ['./controler/*.js',"./Model/*.js"],
 };
 const specs = swaggerJsdoc(options);
 server.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));

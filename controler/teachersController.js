@@ -1,5 +1,7 @@
 const bcrypt = require('bcrypt');
 const teacherSchema=require("./../Model/TeacherModel");
+
+
 /**
  * @swagger
  * /teachers:
