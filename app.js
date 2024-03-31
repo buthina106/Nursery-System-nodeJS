@@ -1,5 +1,8 @@
 require("dotenv").config();
 const express = require("express");
+const swaggerJsdoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
+
 const TeacherRoute = require("./Routs/teacherRouts");
 const studentRoute=require("./Routs/childRoute");
 const ClassRoute=require("./Routs/classRoute");
@@ -11,6 +14,27 @@ const mongoose=require("mongoose");
 
 const server = express();
 const port = process.env.PORT;
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Node.js API",
+      version: "1.0.0",
+      description: "Documentation for your API",
+    },
+    servers: [
+      {
+        url: `http://localhost:${port}`,
+        description: "Local server",
+      },
+      
+    ],
+  },
+  apis: ["./app.js"],
+};
+const specs = swaggerJsdoc(options);
+server.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
 server.use(upload);

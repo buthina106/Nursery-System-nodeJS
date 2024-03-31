@@ -18,5 +18,8 @@ router
   .patch(isAuthorized,updateValidator,controller.updateTeacher)
   .delete(controller.deleteTeacher);
 
+  router.route("/teachers/change-password/:_id")
+  .patch(isAuthorized, controller.changePassword);
+
   module.exports = router;
   

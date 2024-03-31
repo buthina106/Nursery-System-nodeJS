@@ -1,4 +1,20 @@
 const mongoose =require ("mongoose");
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Teacher:
+ *       type: object
+ *       properties:
+ *         _id:
+ *           type: string
+ *         fullName:
+ *           type: string
+ *         email:
+ *           type: string
+ *         image:
+ *           type: string
+ */
 
 const teacherschema =new mongoose.Schema({
 
