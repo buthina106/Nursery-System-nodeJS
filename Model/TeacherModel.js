@@ -1,6 +1,36 @@
 const mongoose =require ("mongoose");
 /**
  * @swagger
+ * paths:
+ *   /login:
+ *     post:
+ *       summary: Log in to the system
+ * 
+ *       requestBody:
+ *         required: true
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 fullName:
+ *                   type: string
+ *                 password:
+ *                   type: string
+ *       responses:
+ *         '200':
+ *           description: OK
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 type: object
+ *                 properties:
+ *                   teacher:
+ *                     $ref: '#/components/schemas/Teacher'
+ *                   token:
+ *                     type: string
+ *         '401':
+ *           description: Unauthorized
  * components:
  *   schemas:
  *     Teacher:
@@ -15,6 +45,7 @@ const mongoose =require ("mongoose");
  *         image:
  *           type: string
  */
+
 
 const teacherschema =new mongoose.Schema({
 

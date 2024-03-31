@@ -19,6 +19,14 @@ const teacherSchema=require("./../Model/TeacherModel");
  *                   type: array
  *                   items:
  *                     $ref: '#/components/schemas/Teacher'
+ *          securityDefinitions: { 
+ *    BearerAuth: {
+ *      type: "apiKey",
+ *      name: "Authorization",
+ *      in: "header",
+ *      description: "Enter your Bearer token in the format 'Bearer <token>'",
+ *    },
+ * 
  */
 exports.getAllTeacher = (req, res, next) => {  
   teacherSchema.find({})

@@ -22,16 +22,30 @@ const options = {
       version: "1.0.0",
       description: "Documentation for your API",
     },
+    security: [
+      {
+        apiKeyAuth: [] 
+      }
+    ],
+    components: {
+      securitySchemes: {
+        apiKeyAuth: {
+          type: 'apiKey',
+          in: 'header',
+          name: 'x-api-key'
+        }
+      } 
+    },
     servers: [
       {
         url: `http://localhost:${port}`,
         description: "Local server",
-      },
-      
+      }      
     ],
   },
-  apis: ['./controler/*.js',"./Model/*.js"],
+  apis: ['./controler/*.js',"./Model/*.js","./Routs/*.js"],
 };
+
 const specs = swaggerJsdoc(options);
 server.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
