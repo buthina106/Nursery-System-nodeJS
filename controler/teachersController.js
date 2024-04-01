@@ -1,12 +1,12 @@
 const bcrypt = require('bcrypt');
 const teacherSchema=require("./../Model/TeacherModel");
-
-
 /**
  * @swagger
  * /teachers:
  *   get:
  *     summary: Get all teachers
+ *     security:
+ *       - BearerAuth: []  
  *     responses:
  *       200:
  *         description: Returns all teachers
@@ -19,15 +19,11 @@ const teacherSchema=require("./../Model/TeacherModel");
  *                   type: array
  *                   items:
  *                     $ref: '#/components/schemas/Teacher'
- *          securityDefinitions: { 
- *    BearerAuth: {
- *      type: "apiKey",
- *      name: "Authorization",
- *      in: "header",
- *      description: "Enter your Bearer token in the format 'Bearer <token>'",
- *    },
+ *      
  * 
  */
+
+
 exports.getAllTeacher = (req, res, next) => {  
   teacherSchema.find({})
           .then((data)=>{
